@@ -43,4 +43,22 @@ jobs:
       # executar os testes e2e
       - name: Executando Testes E2E
         run: yarn run e2e
+        continue-on-error: true
+
+      # Relatório visual direto no GitHub
+      - name: Exibir Relatório JUnit no GitHub
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Relatório de Testes Playwright
+          path: test-results/results.xml
+          reporter: java-junit
+
+      # Relatório HTML como artefato
+      - name: Salvar Relatório HTML Playwright
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-html-report
+          path: playwright-report/
+        
 
