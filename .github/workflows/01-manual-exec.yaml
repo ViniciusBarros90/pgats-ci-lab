@@ -51,7 +51,7 @@ jobs:
         if: always()
         with:
           name: Relatório de Testes Playwright
-          path: test-results/results.xml
+          path: results.xml
           reporter: java-junit
 
       # Relatório HTML como artefato
