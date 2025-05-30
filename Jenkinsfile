@@ -20,7 +20,7 @@ pipeline {
 
         stage('Instalar Dependências') {
             steps {
-                bat 'yarn install'
+                bat 'yarn'
             }
         }
 
