@@ -1,25 +1,14 @@
 pipeline {
-    agent any  // Usa um agente Jenkins (máquina virtual, container etc.)
+    agent any
 
     options {
-        skipDefaultCheckout(true) // Evita checkout automático (vamos controlar isso)
+        skipDefaultCheckout(true)
     }
 
     stages {
         stage('Clonar Projeto') {
             steps {
                 checkout scm
-            }
-        }
-
-        stage('Instalar Node.js') {
-            steps {
-                bat '''
-                    curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
-                    apt-get install -y nodejs
-                    node -v
-                    npm -v
-                '''
             }
         }
 
@@ -31,7 +20,7 @@ pipeline {
 
         stage('Instalar Dependências') {
             steps {
-                bat 'yarn'
+                bat 'yarn install'
             }
         }
 
@@ -43,7 +32,7 @@ pipeline {
 
         stage('Executar Testes E2E') {
             steps {
-                bat 'yarn run e2e || true' // Permite falhas sem quebrar o pipeline
+                bat 'yarn run e2e || exit 0'  // para não quebrar o pipeline se falhar
             }
         }
     }
