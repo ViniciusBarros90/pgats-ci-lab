@@ -14,7 +14,7 @@ pipeline {
 
         stage('Instalar Node.js') {
             steps {
-                sh '''
+                bat '''
                     curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
                     apt-get install -y nodejs
                     node -v
@@ -25,25 +25,25 @@ pipeline {
 
         stage('Instalar Yarn') {
             steps {
-                sh 'npm install -g yarn'
+                bat 'npm install -g yarn'
             }
         }
 
         stage('Instalar Dependências') {
             steps {
-                sh 'yarn'
+                bat 'yarn'
             }
         }
 
         stage('Instalar Playwright') {
             steps {
-                sh 'yarn playwright install'
+                bat 'yarn playwright install'
             }
         }
 
         stage('Executar Testes E2E') {
             steps {
-                sh 'yarn run e2e || true' // Permite falhas sem quebrar o pipeline
+                bat 'yarn run e2e || true' // Permite falhas sem quebrar o pipeline
             }
         }
     }
