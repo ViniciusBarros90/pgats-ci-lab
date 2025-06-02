@@ -20,19 +20,37 @@ pipeline {
 
         stage('Instalar Dependências') {
             steps {
-                bat 'yarn'
+                bat '''
+                    set PATH=%APPDATA%\\npm;%PATH%
+                    yarn
+                '''
             }
         }
 
         stage('Instalar Playwright') {
             steps {
-                bat 'yarn playwright install'
+                bat '''
+                    set PATH=%APPDATA%\\npm;%PATH%
+                    yarn playwright install
+                '''
             }
         }
 
         stage('Executar Testes E2E') {
             steps {
-                bat 'yarn run e2e || exit 0'  // para não quebrar o pipeline se falhar
+                bat '''
+                    set PATH=%APPDATA%\\npm;%PATH%
+                    yarn run e2e || exit 0
+                '''
+            }
+        }
+
+        stage('Verificar Yarn') {
+            steps {
+                bat '''
+                    set PATH=%APPDATA%\\npm;%PATH%
+                    where yarn
+                '''
             }
         }
     }
