@@ -2,7 +2,7 @@
 
 # nome do nosso 'pipeline'
 
-name: 'Execução Manual'
+name: 'Execução Manual self-hosted-runner'
 
 # regras de disparo (gatilhos/triggers)
 # gatilho de execução manual = workflow_dispatch
