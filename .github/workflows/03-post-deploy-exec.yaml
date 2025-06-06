@@ -10,9 +10,10 @@ name: 'Execução por Deploy'
 # gatilho de exec a partir de outro pipe = workflow_run
 
 on:
-  workflow_run: ['Execução Manual']
-  types:
-    - completed
+  workflow_run:
+    workflows: ['Execução Manual']
+    types:
+      - completed
 
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
