@@ -2,7 +2,7 @@
 
 # nome do nosso 'pipeline'
 
-name: 'Execução por Deployl'
+name: 'Execução por Deploy'
 
 # regras de disparo (gatilhos/triggers)
 # gatilho de execução manual = workflow_dispatch
