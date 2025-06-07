@@ -19,7 +19,7 @@ jobs:
         run: yarn
 
       - name: Checando padronizado o código
-        run: yarn Lint
+        run: yarn lint
 
   unidade:
     runs-on: ubuntu-latest

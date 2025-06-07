@@ -7,4 +7,4 @@ reports
 /playwright/.cache/
 results.xml
 actions-runner/
-actions-runner/_work/pgats-ci-lab/pgats-ci-lab/
+actions-runner/_work/
