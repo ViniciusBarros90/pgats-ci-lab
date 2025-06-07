@@ -24,6 +24,7 @@ jobs:
 
     # Só vai seguir para as etapas de steps se for completado com sucesso
     # condicional - if
+    # Condicional a nível job
     # `${{ expressao }}`
     # == comparação
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -57,7 +58,8 @@ jobs:
         run: yarn run e2e
 
       # sobe arquivos relevantes para que eu possa fazer o download depois
-        # Eu quero este relatório exceto se for cancelado
+      #Condicional a nível Step
+      # Eu quero que baixe este relatório exceto se for cancelado
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with: 
