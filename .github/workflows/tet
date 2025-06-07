@@ -1,0 +1,23 @@
+# CI de nível 04 - Disparo dos testes dentro do pipeline
+- jobs - 
+
+
+- workflow - n4
+  - jobs - inspecao *bloco 1)
+    - steps - instalar deps
+    - steps - executar script de lint
+
+  - jobs - unidades (bloco 1)
+    - steps - executar script de teste de unidade
+
+  - jobs - e2e-tests (bloco 2)
+    - steps - instalar deps
+    - steps - subir a aplicaca localmente
+    - steps - instalar browser/navegadores
+    - steps - executar script de testes e2e
+    - steps - publicar resultados de testes (zip/online)
+  - jobs - deploy (bloco 3)
+    - steps - instalar deps
+    - steps - gerar artefatos de aplicacao
+    - steps - publicar a aplicacao em algum ambiente
+    
