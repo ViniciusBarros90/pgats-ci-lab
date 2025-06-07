@@ -1,4 +1,4 @@
-# CI de Nível 04 - Disparo de testes dentro da pipeline de dev
+# CI de nível 04 - Disparo dos testes dentro do pipeline
 
 name: 'Execução Integrada'
 
@@ -6,71 +6,77 @@ on:
   workflow_dispatch:
 
 jobs:
-  inspecao:
-    runs-on: ubuntu-latest
-    steps:
+    inspecao:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Instalando Yarn
+          run: npm install -g yarn
+
+        - name: Instalando dependências
+          run: yarn
+
+        - name: Checando padronizado o código
+          run: yarn Lint
+
+        
+    unidade:
+      runs-on: ubuntu-latest  
+      
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Instalando Yarn
+          run: npm install -g yarn
+
+        - name: Instalando dependências
+          run: yarn
+
+        - name: Executando testes de unidades
+          run: yarn test
+
+    e2e-tests:
+      runs-on: ubuntu-latest  
+      
+      steps:
+      # clone do projeto
       - uses: actions/checkout@v4
 
+      # instalação do node
       - uses: actions/setup-node@v4
         with:
           node-version: latest
 
-      - name: Install Yarn
+      # instalação do yarn
+      - name: Instalando yarn
         run: npm install -g yarn
 
-      - name: Install project dependencies
+
+      # instalação das depedências
+      - name: Instalando depedências
         run: yarn
 
-      - name: Code linting
-        run: yarn lint
-  unidade:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: latest
-
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Install project dependencies
-        run: yarn
-
-      - name: Run unit tests
-        run: yarn run test
-  e2e-tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: latest
-
-      - name: Install Yarn
-        run: npm install -g yarn
-
-      - name: Install project dependencies
-        run: yarn
-
-      - name: Install Playwright browsers
+      # instalação do navegadores Playwright
+      - name: Instalando Playwright
         run: yarn playwright install
 
-      - name: Run E2E tests
+      # executar os testes e2e
+      - name: Executando Testes E2E
         run: yarn run e2e
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        if: ${{ always() }}
-        with:
+      # sobe arquivos relevantes para que eu possa fazer o download depois
+      # Condicional a nível Step
+      # Eu quero que baixe este relatório exceto se for cancelado
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with: 
+          name: report
           path: ./playwright-report
-  deploy:
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: Deploy simulation
-        run: echo 'Deploy application'
+    deploy:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Simulação do Deploy
+          run: echo "simulando o deploy com sucesso"
