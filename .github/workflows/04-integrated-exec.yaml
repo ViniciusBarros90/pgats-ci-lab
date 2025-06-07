@@ -6,41 +6,40 @@ on:
   workflow_dispatch:
 
 jobs:
-    inspecao:
-      runs-on: ubuntu-latest
+  inspecao:
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-        - name: Instalando Yarn
-          run: npm install -g yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-        - name: Instalando dependências
-          run: yarn
+      - name: Instalando dependências
+        run: yarn
 
-        - name: Checando padronizado o código
-          run: yarn Lint
+      - name: Checando padronizado o código
+        run: yarn Lint
 
-        
-    unidade:
-      runs-on: ubuntu-latest  
-      
-      steps:
-        - uses: actions/checkout@v4
+  unidade:
+    runs-on: ubuntu-latest
 
-        - name: Instalando Yarn
-          run: npm install -g yarn
+    steps:
+      - uses: actions/checkout@v4
 
-        - name: Instalando dependências
-          run: yarn
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-        - name: Executando testes de unidades
-          run: yarn test
+      - name: Instalando dependências
+        run: yarn
 
-    e2e-tests:
-      runs-on: ubuntu-latest  
-      
-      steps:
+      - name: Executando testes de unidades
+        run: yarn test
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
       # clone do projeto
       - uses: actions/checkout@v4
 
@@ -52,7 +51,6 @@ jobs:
       # instalação do yarn
       - name: Instalando yarn
         run: npm install -g yarn
-
 
       # instalação das depedências
       - name: Instalando depedências
@@ -71,12 +69,12 @@ jobs:
       # Eu quero que baixe este relatório exceto se for cancelado
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
-        with: 
+        with:
           name: report
           path: ./playwright-report
 
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Simulação do Deploy
-          run: echo "simulando o deploy com sucesso"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulação do Deploy
+        run: echo "simulando o deploy com sucesso"

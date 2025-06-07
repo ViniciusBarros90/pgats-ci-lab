@@ -20,7 +20,7 @@ module.exports = {
       }
     ],
     'no-console': 'error',
-    'yoda': 'error',
+    yoda: 'error',
     'prefer-const': [
       'error',
       {
@@ -38,8 +38,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         'jest/no-standalone-expect': 'off',
         'jest/no-conditional-expect': 'off',
-        'no-console': 'off',
-
+        'no-console': 'off'
       }
     }
   ],

@@ -17,6 +17,7 @@ This action provides the following functionality for GitHub Actions users:
 See [action.yml](action.yml)
 
 <!-- start usage -->
+
 ```yaml
 - uses: actions/setup-node@v4
   with:
@@ -26,22 +27,22 @@ See [action.yml](action.yml)
     node-version: ''
 
     # File containing the version Spec of the version to use.  Examples: package.json, .nvmrc, .node-version, .tool-versions.
-    # If node-version and node-version-file are both provided the action will use version from node-version. 
+    # If node-version and node-version-file are both provided the action will use version from node-version.
     node-version-file: ''
 
-    # Set this option if you want the action to check for the latest available version 
+    # Set this option if you want the action to check for the latest available version
     # that satisfies the version spec.
-    # It will only get affect for lts Nodejs versions (12.x, >=10.15.0, lts/Hydrogen). 
+    # It will only get affect for lts Nodejs versions (12.x, >=10.15.0, lts/Hydrogen).
     # Default: false
     check-latest: false
 
     # Target architecture for Node to use. Examples: x86, x64. Will use system architecture by default.
-    # Default: ''. The action use system architecture by default 
+    # Default: ''. The action use system architecture by default
     architecture: ''
 
-    # Used to pull node distributions from https://github.com/actions/node-versions. 
-    # Since there's a default, this is typically not supplied by the user. 
-    # When running this action on github.com, the default value is sufficient. 
+    # Used to pull node distributions from https://github.com/actions/node-versions.
+    # Since there's a default, this is typically not supplied by the user.
+    # When running this action on github.com, the default value is sufficient.
     # When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.
     #
     # We recommend using a service account with the least permissions necessary. Also
@@ -57,18 +58,18 @@ See [action.yml](action.yml)
     # Default: ''
     cache: ''
 
-    # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc. 
-    # It will generate hash from the target file for primary key. It works only If cache is specified.  
+    # Used to specify the path to a dependency file: package-lock.json, yarn.lock, etc.
+    # It will generate hash from the target file for primary key. It works only If cache is specified.
     # Supports wildcards or a list of file names for caching multiple dependencies.
     # Default: ''
     cache-dependency-path: ''
 
-    # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file, 
+    # Optional registry to set up for auth. Will set the registry in a project level .npmrc and .yarnrc file,
     # and set up auth to read in from env.NODE_AUTH_TOKEN.
     # Default: ''
     registry-url: ''
 
-    # Optional scope for authenticating against scoped registries. 
+    # Optional scope for authenticating against scoped registries.
     # Will fall back to the repository owner when using the GitHub Packages registry (https://npm.pkg.github.com/).
     # Default: ''
     scope: ''
@@ -92,18 +93,19 @@ See [action.yml](action.yml)
     # Default: ''
     mirror-token: ''
 ```
+
 <!-- end usage -->
 
 **Basic:**
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
-- uses: actions/setup-node@v4
-  with:
-    node-version: 18
-- run: npm ci
-- run: npm test
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 18
+  - run: npm ci
+  - run: npm test
 ```
 
 The `node-version` input is optional. If not supplied, the node version from PATH will be used. However, it is recommended to always specify Node.js version and don't rely on the system one.
@@ -118,10 +120,10 @@ The `node-version` input supports the Semantic Versioning Specification, for mor
 
 Examples:
 
- - Major versions: `18`, `20`
- - More specific versions: `10.15`, `16.15.1` , `18.4.0`
- - NVM LTS syntax: `lts/erbium`, `lts/fermium`, `lts/*`, `lts/-n`
- - Latest release: `*` or `latest`/`current`/`node`
+- Major versions: `18`, `20`
+- More specific versions: `10.15`, `16.15.1` , `18.4.0`
+- NVM LTS syntax: `lts/erbium`, `lts/fermium`, `lts/*`, `lts/-n`
+- Latest release: `*` or `latest`/`current`/`node`
 
 **Note:** Like the other values, `*` will get the latest [locally-cached Node.js version](https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2204-Readme.md#nodejs), or the latest version from [actions/node-versions](https://github.com/actions/node-versions/blob/main/versions-manifest.json), depending on the [`check-latest`](docs/advanced-usage.md#check-latest-version) input.
 
@@ -147,27 +149,27 @@ See the examples of using cache for `yarn`/`pnpm` and `cache-dependency-path` in
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
-- uses: actions/setup-node@v4
-  with:
-    node-version: 20
-    cache: 'npm'
-- run: npm ci
-- run: npm test
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 20
+      cache: 'npm'
+  - run: npm ci
+  - run: npm test
 ```
 
 **Caching npm dependencies in monorepos:**
 
 ```yaml
 steps:
-- uses: actions/checkout@v4
-- uses: actions/setup-node@v4
-  with:
-    node-version: 20
-    cache: 'npm'
-    cache-dependency-path: subdir/package-lock.json
-- run: npm ci
-- run: npm test
+  - uses: actions/checkout@v4
+  - uses: actions/setup-node@v4
+    with:
+      node-version: 20
+      cache: 'npm'
+      cache-dependency-path: subdir/package-lock.json
+  - run: npm ci
+  - run: npm test
 ```
 
 ## Matrix Testing
@@ -178,7 +180,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 14, 16, 18 ]
+        node: [14, 16, 18]
     name: Node ${{ matrix.node }} sample
     steps:
       - uses: actions/checkout@v4
@@ -207,17 +209,17 @@ If the runner is not able to access github.com, any Nodejs versions requested du
 
 ## Advanced usage
 
- - [Check latest version](docs/advanced-usage.md#check-latest-version)
- - [Using a node version file](docs/advanced-usage.md#node-version-file)
- - [Using different architectures](docs/advanced-usage.md#architecture)
- - [Using v8 canary versions](docs/advanced-usage.md#v8-canary-versions)
- - [Using nightly versions](docs/advanced-usage.md#nightly-versions)
- - [Using rc versions](docs/advanced-usage.md#rc-versions)
- - [Caching packages data](docs/advanced-usage.md#caching-packages-data)
- - [Using multiple operating systems and architectures](docs/advanced-usage.md#multiple-operating-systems-and-architectures)
- - [Publishing to npmjs and GPR with npm](docs/advanced-usage.md#publish-to-npmjs-and-gpr-with-npm)
- - [Publishing to npmjs and GPR with yarn](docs/advanced-usage.md#publish-to-npmjs-and-gpr-with-yarn)
- - [Using private packages](docs/advanced-usage.md#use-private-packages)
+- [Check latest version](docs/advanced-usage.md#check-latest-version)
+- [Using a node version file](docs/advanced-usage.md#node-version-file)
+- [Using different architectures](docs/advanced-usage.md#architecture)
+- [Using v8 canary versions](docs/advanced-usage.md#v8-canary-versions)
+- [Using nightly versions](docs/advanced-usage.md#nightly-versions)
+- [Using rc versions](docs/advanced-usage.md#rc-versions)
+- [Caching packages data](docs/advanced-usage.md#caching-packages-data)
+- [Using multiple operating systems and architectures](docs/advanced-usage.md#multiple-operating-systems-and-architectures)
+- [Publishing to npmjs and GPR with npm](docs/advanced-usage.md#publish-to-npmjs-and-gpr-with-npm)
+- [Publishing to npmjs and GPR with yarn](docs/advanced-usage.md#publish-to-npmjs-and-gpr-with-yarn)
+- [Using private packages](docs/advanced-usage.md#use-private-packages)
 
 ## Recommended permissions
 

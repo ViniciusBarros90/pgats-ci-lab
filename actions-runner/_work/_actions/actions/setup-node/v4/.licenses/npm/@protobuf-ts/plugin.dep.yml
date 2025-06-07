@@ -1,14 +1,15 @@
 ---
-name: "@protobuf-ts/plugin"
+name: '@protobuf-ts/plugin'
 version: 2.9.5
 type: npm
-summary: The protocol buffer compiler plugin "protobuf-ts" generates TypeScript, gRPC-web,
+summary:
+  The protocol buffer compiler plugin "protobuf-ts" generates TypeScript, gRPC-web,
   Twirp, and more.
 homepage: https://github.com/timostamm/protobuf-ts
 license: apache-2.0
 licenses:
-- sources: LICENSE
-  text: |2
+  - sources: LICENSE
+    text: |2
                                     Apache License
                                Version 2.0, January 2004
                             http://www.apache.org/licenses/

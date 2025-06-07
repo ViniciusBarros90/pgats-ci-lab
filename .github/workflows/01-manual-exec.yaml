@@ -13,10 +13,9 @@ on:
 # trabalhos/tarefas dentro do pipeline = jobs
 jobs:
   e2e-tests:
-
     #Maquina que o job vai executar
-    runs-on: ubuntu-latest  
-    
+    runs-on: ubuntu-latest
+
     # passos do script de build
     steps:
       # clone do projeto
@@ -31,7 +30,6 @@ jobs:
       - name: Instalando yarn
         run: npm install -g yarn
 
-
       # instalação das depedências
       - name: Instalando depedências
         run: yarn
@@ -43,4 +41,3 @@ jobs:
       # executar os testes e2e
       - name: Executando Testes E2E
         run: yarn run e2e
-        
