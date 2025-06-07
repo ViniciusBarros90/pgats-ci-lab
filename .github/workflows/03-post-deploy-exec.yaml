@@ -20,7 +20,14 @@ jobs:
   e2e-tests:
 
     #Maquina que o job vai executar
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+
+    # Só vai seguir para as etapas de passos se for completado com sucesso
+    # condicional - if
+    # `${ expressao }`
+    # == comparação
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     
     # passos do script de build
     steps:
