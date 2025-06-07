@@ -6,4 +6,4 @@ reports
 /blob-report/
 /playwright/.cache/
 results.xml
-actions-runner
+actions-runner/
